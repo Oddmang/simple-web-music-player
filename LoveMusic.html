@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>LoveMusic</title>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+  <div class="main">
+
+    <!-- 播放器整体 -->
+    <div id="player" class="player_wrap" v-cloak>
+
+      <!-- 顶部搜索栏 -->
+      <div class="search_top">
+        <input type="text" v-model="keywords" @keyup.enter="searchMusic" placeholder="请输入歌手或歌曲 (enter搜索)" />
+      </div>
+
+      <!-- 中部歌曲详情 -->
+      <div class="center_mid">
+        <!-- 歌曲信息 -->
+        <div class='songs_con'>
+          <ul class="song_list">
+            <li v-for="item in musicList">
+              <a href="javascript:;" @click="playMusic(item.id)"></a>
+              <b>{{ item.name }}</b>
+              <span v-if="item.mvid!=0" @click="playMV(item.mvid);play()"><i></i></span>
+            </li>
+          </ul>
+          <img src="images/line.png" class="left_line" alt="">
+        </div>
+        <!-- 唱片信息 -->
+        <div class="player_con" :class="{playing:isPlaying}">
+          <img src="images/player_bar.png" class="player_bar" />
+          <img src="images/disc.png" class="disc autoRotate" />
+          <img src="./images/musicLogo.png" class="cover autoRotate" />
+        </div>
+        <!-- 评论信息 -->
+        <div class="comments_con">
+          <h5 class='comment'>热门评论</h5>
+          <div class='comment_list'>
+            <dl v-for="item in hotComments">
+              <dt><img :src="item.user.avatarUrl" alt=""></dt>
+              <dd class="name">{{item.user.nickname}}</dd>
+              <dd class="detail">
+                {{ item.content }}
+              </dd>
+            </dl>
+          </div>
+          <img src="images/line.png" class="right_line">
+        </div>
+      </div>
+
+      <!-- 底部进度条 -->
+      <div class="audio_foot">
+        <audio ref='audio' @play="play" @pause="pause" :src="musicUrl" controls autoplay loop class="myaudio"></audio>
+      </div>
+
+      <!-- MV播放 -->
+      <div class="video_con" v-show="isShow" style="display: none;">
+        <video :src="mvUrl" controls="controls" autoplay></video>
+        <div class=" mask" @click="hideMV"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 引入axios  -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <!-- 引入vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+  <script src="./js/index.js"></script>
+</body>
+
+</html>
