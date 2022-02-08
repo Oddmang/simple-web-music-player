@@ -1,9 +1,9 @@
-# 简易网页音乐播放器
+# Simple Web Music Player
 
-#### 介绍
-利用丰富的CSS展示音乐播放器的主体，通过Vue+axios获取音乐开放接口并实现网页在线播放 Music 或 MV 功能。
+#### Introduce
+Use rich CSS to display the main body of the music player, obtain the music open interface through Vue + Axios, and realize the function of playing music or MV online on the web page.
 
-#### 使用说明
+#### Instructions
 
-1.  “克隆/下载”到本地
-2.  直接双击LoveMusic.html即可查看
+1.  Clone / download to local
+2.  Double click LoveMusic.html to view
